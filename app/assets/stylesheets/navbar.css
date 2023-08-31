@@ -5,6 +5,7 @@
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Ubuntu', sans-serif;
+
 }
 nav{
     position: fixed;
@@ -66,6 +67,7 @@ nav.sticky .nav-links li a:hover{
     background: url("background.jpeg") no-repeat;
     background-attachment: fixed;
     font-family: 'Ubuntu', sans-serif;
+
 }
 h2{
     font-size: 30px;
