@@ -6,7 +6,8 @@ class TopicsController < ApplicationController
     if params[:search]
       @topics = Topic.where("title LIKE ?", "%#{params[:search]}%")
     else
-      @topics = Topic.all
+      @topics = Topic.all.order(title: :asc)
+
     end
   end
 
@@ -32,6 +33,7 @@ class TopicsController < ApplicationController
       if @topic.save
         format.html { redirect_to topic_url(@topic), notice: "Topic was successfully created." }
         format.json { render :show, status: :created, location: @topic }
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
@@ -46,8 +48,10 @@ class TopicsController < ApplicationController
         format.html { redirect_to topic_url(@topic), notice: "Topic was successfully updated." }
         format.json { render :show, status: :ok, location: @topic }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
+        # format.html { render :edit, status: :unprocessable_entity }
+        # format.json { render json: @topic.errors, status: :unprocessable_entity }
+        flash[:alert] = "Topic update failed. Please check the form."
+        render :edit
       end
     end
   end
