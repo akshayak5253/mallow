@@ -9,7 +9,7 @@
     <ul class="nav-links">
       <li><%= link_to 'Home', root_path %></li>
       <li><%= link_to 'Topics', topics_path %></li>
-      <li><a href="#">Post</a></li>
+      <li><%= link_to 'Tags', tags_path %></li>
       <li><a href="#">About us</a></li>
     </ul>
   </div>
@@ -38,8 +38,8 @@
     <tr>
     <thead>
     <tbody>
-    <% @topics.each do |topic| %>
-      <tr><th scope="col"><%=topic.id %></th>
+    <% @topics.each_with_index do |topic,i| %>
+      <tr><th scope="col"><%=i+1 %></th>
     <td><%=topic.title %></td>
     <td><%=topic.author %></td>
         <td><a href="topics/<%= topic.id %>">See</a></td></tr>

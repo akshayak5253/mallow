@@ -1,6 +1,31 @@
-<h1>Posts with Tag: <%= @tag.name %></h1>
-<ul>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, topic_post_path(post.topic, post) %></li>
-  <% end %>
-</ul>
+<head><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head><body>
+<nav>
+  <div class="nav-content">
+    <div class="logo">
+      <a href="#">JustWrite</a>
+    </div>
+    <ul class="nav-links">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><li><%= link_to 'Topics', topics_path %></li></li>
+      <li><%= link_to 'Tags', tags_path %></li>
+      <li><a href="#">About us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="home">
+</section>
+<div class="text">
+  <div class="container mt-4">
+    <h1 class="display-4">Posts with Tag: <%= @tag.name %></h1>
+    <ul class="list-group">
+      <% @posts.each do |post| %>
+        <li class="list-group-item">
+          <%= link_to post.title, topic_post_path(post.topic, post) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

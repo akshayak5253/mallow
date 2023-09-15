@@ -110,3 +110,15 @@ input[type=button], input[type=submit], input[type=reset] {
 .search{
     box-sizing: border-box;
 }
+.button-container {
+    display: flex;
+}
+
+.button-container button {
+    margin-right: 10px; /* Optional: Add spacing between buttons */
+}
+
+ a {
+     text-decoration: none !important;
+ }
+

@@ -9,7 +9,7 @@
     <ul class="nav-links">
       <li><%= link_to 'Home', root_path %></li>
       <li><%= link_to 'Topics', topics_path %></li>
-      <li><a href="#">Post</a></li>
+      <li><%= link_to 'Tags', tags_path %></li>
       <li><a href="#">About us</a></li>
     </ul>
   </div>
@@ -34,14 +34,19 @@
         <th scope="col">S.No</th>
         <th scope="col">Title</th>
         <th scope="col">Author</th>
-        <th scope="col">View
+        <th scope="col">Posted at</th>
+        <th scope="col">Last Updated at</th>
+        <th scope="col" rowspan="2">View</th>
+
       <tr>
         <thead>
       <tbody>
-      <% @posts.each do |post| %>
-        <tr><th scope="col"><%=post.id %></th>
+      <% @posts.each_with_index do |post,i| %>
+        <tr><th scope="col"><%=i+1 %></th>
           <td><%=post.title %></td>
-          <td>Writer name</td>
+          <td><%=post.writer%></td>
+          <td><%=post.created_at.strftime('%d/%m/%y')%></td>
+          <td><%time_difference = (Time.now - post.updated_at)/3600 %><%=time_difference.round(0)%> hour(s)ago<td>
           <td><a href="posts/<%= post.id %>">See</a></td></tr>
       <% end %>
       </tbody>

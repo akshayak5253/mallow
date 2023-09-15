@@ -9,7 +9,7 @@
     <ul class="nav-links">
       <li><%= link_to 'Home', root_path %></li>
       <li><li><%= link_to 'Topics', topics_path %></li></li>
-      <li><a href="#">Post</a></li>
+      <li><%= link_to 'Tags', tags_path %></li>
       <li><a href="#">About us</a></li>
     </ul>
   </div>
@@ -21,12 +21,15 @@
 
 <% topics = @topics %>
 <h1 style="text-align: center"><%= topics.title %></h1>
+  <h5 style="text-align: center">Created by - <%= topics.author %></h5>
   <p style="text-align: center;font-size: large">Topic : Followers : Post</p>
-<div>
-  <%= link_to "Edit this topic", edit_topic_path(@topic) %>
-  <%= button_to "Destroy this topic", @topic, method: :delete %>
+<div class="button-container">
+  <%= link_to "Edit this topic  ", edit_topic_path(@topic), class: "btn btn-primary" %>
+
+  <%= button_to "  Destroy this topic", @topic, method: :delete, class: "btn btn-danger" %>
+
+  <%=link_to '<- Back to Topics', topics_path, class: "btn btn-success" %>
 </div>
-  <button class="btn btn-success"><-Back To Topics</button>
 </div>
 <%= link_to 'Create New Post', new_topic_post_path(@topic) %>
 <%= link_to 'View Posts', topic_posts_path(@topic) %>
