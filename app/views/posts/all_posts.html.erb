@@ -1,3 +1,4 @@
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -18,10 +19,7 @@
 <div class="text">
   <a href="posts/new"><button class="btn btn-success">Create new post</button></a>
 
-  <div class="search"> <%= form_tag topic_posts_path(@topic), method: :get do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search by posts" %>
-      <button value="Submit"><i class="fa fa-search"></i></button>
-    <% end %>
+  <div class="search">
   </div>
   <p style="color: green"><%= notice %></p>
 
@@ -35,21 +33,26 @@
         <th scope="col">Author</th>
         <th scope="col">Posted at</th>
         <th scope="col">Last Updated at</th>
-        <th scope="col" rowspan="2">View</th>
 
       <tr>
         <thead>
       <tbody>
       <% @posts.each_with_index do |post,i| %>
         <tr><th scope="col"><%=i+1 %></th>
-          <td><%=post.title %></td>
+          <td><%= link_to post.title, topic_post_path(post.topic, post) %></td>
           <td><%=post.writer%></td>
           <td><%=post.created_at.strftime('%d/%m/%y')%></td>
           <td><%time_difference = (Time.now - post.updated_at)/3600 %><%=time_difference.round(0)%> hour(s)ago<td>
-          <td><a href="posts/<%= post.id %>">See</a></td></tr>
       <% end %>
       </tbody>
     </table>
   </div>
 </div>
+<div class="pagination">
+  <%= paginate @posts %>
+</div>
+
+
+
+
 

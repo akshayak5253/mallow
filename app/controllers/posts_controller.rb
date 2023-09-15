@@ -1,15 +1,19 @@
 # Post Controller
 class PostsController < ApplicationController
-  before_action :set_topic
+  before_action :set_topic, except: [:all_posts]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @topic = Topic.find(params[:topic_id])
     @posts = @topic.posts
     return unless params[:search]
-
     @posts = Post.where("title LIKE ?", "%#{params[:search]}%")
   end
+  def all_posts
+    @posts = Post.page(params[:page]).per(10)
+  end
+
+
 
   def new
     @topic = Topic.find(params[:topic_id])

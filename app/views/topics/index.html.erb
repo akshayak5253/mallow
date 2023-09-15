@@ -16,6 +16,7 @@
 </nav>
 <section class="home"></section>
 <div class="text">
+  <%= link_to 'View All Posts', all_posts_path %>
 <a href="topics/new"><button class="btn btn-success">Create new topic</button></a>
 
   <div class="search"> <%= form_tag topics_path, method: :get do %>
