@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   def new
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build
+    @post.tag_ids = []
   end
 
   def create
@@ -36,6 +37,8 @@ class PostsController < ApplicationController
   end
 
   def update
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:id])
     if @post.update(post_params)
       redirect_to topic_post_path(@topic, @post), notice: 'Post was successfully updated.'
     else
@@ -59,6 +62,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, tag_ids: [])
   end
 end

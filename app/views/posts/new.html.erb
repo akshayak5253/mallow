@@ -1,15 +1,2 @@
-<%= form_for [@topic,@post] do |f| %>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Create Post" %>
-  </div>
-<% end %>
+<h1>New post</h1>
+<%= render "form", post: @post %>

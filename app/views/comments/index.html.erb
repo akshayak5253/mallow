@@ -1,0 +1,37 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'comments' %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<nav>
+  <div class="nav-content">
+    <div class="logo">
+      <a><%= link_to 'JustWrite', root_path %></a>
+    </div>
+    <ul class="nav-links">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Topics', topics_path %></li>
+      <li><a href="#">Post</a></li>
+      <li><a href="#">About us</a></li>
+    </ul>
+  </div>
+</nav>
+<section class="home"></section>
+<div class="text">
+  <a href="comments/new" ><button class="btn btn-success" style="float: right;">Create new comments</button></a>
+
+  <h1>Comments</h1>
+
+  <ul class="comment-list">
+    <% @comments.each_with_index do |comment,i| %>
+      <li class="comment">
+        <div class="comment-header">
+          <strong><%= i+1 %></strong>
+        </div>
+        <div class="comment-content">
+          <%= comment.content %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

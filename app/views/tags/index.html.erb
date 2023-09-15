@@ -1,0 +1,49 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<nav>
+  <div class="nav-content">
+    <div class="logo">
+      <a><%= link_to 'JustWrite', root_path %></a>
+    </div>
+    <ul class="nav-links">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Topics', topics_path %></li>
+      <li><a href="#">Post</a></li>
+      <li><a href="#">About us</a></li>
+    </ul>
+  </div>
+</nav>
+<section class="home"></section>
+<div class="search"> <%= form_tag tags_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by name" %>
+    <button value="Submit"><i class="fa fa-search"></i></button>
+  <% end %>
+</div>
+<%= form_with(model: Tag.new, url: tags_path, method: :post) do |form| %>
+  <div class="input-group mb-3">
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter tag name" %>
+    <div class="input-group-append">
+      <%= form.submit "Create Tag", class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
+<div class="text">
+<div class="container">
+  <h1 class="mt-4">Tags Available</h1>
+  <ul class="list-group">
+    <% if @tags.present? %>
+      <% @tags.each do |tag| %>
+        <li class="list-group-item">
+          <%= link_to tag.name, posts_tag_path(tag), class: "btn btn-primary" %>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="list-group-item">
+        <h1>No tags Available</h1>
+      </li>
+    <% end %>
+  </ul>
+</div>
+</div>
+

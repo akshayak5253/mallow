@@ -21,18 +21,26 @@
 
   <% if @posts.present? %>
     <% posts = @posts %>
-    <h1 style="text-align: center"><%= posts.title %></h1>
-    <p style="text-align: center;font-size: large"><%= posts.content %></p>
+    <h1 style="text-align: center;color: #340fff"><%= posts.title %></h1>
+    <p style="font-size: large"><%= posts.content %></p>
     <div>
       <%= link_to 'Edit this post', edit_topic_post_path(@topic, @post) %>
     </div>
   <% else %>
     <p>No posts available.</p>
   <% end %>
+  <p><strong>Tags:</strong>
+    <% @post.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+  </p>
 
   <div>
     <%= button_to "Destroy this post", topic_post_path(@topic, @post), method: :delete %>
+    <%= link_to "View Comments", topic_post_comments_path(@topic, @post) %>
+
   </div>
-  <button class="btn btn-success"><-Back To Topics</button>
+  <%= link_to "Go back", topic_posts_path, class: "btn btn-success" %>
+
 </div>
 
