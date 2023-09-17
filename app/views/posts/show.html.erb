@@ -43,4 +43,20 @@
 
 
 </div>
+<!-- Add this to display existing ratings -->
+<h3>Existing Ratings:</h3>
+<% (1..5).each do |rating| %>
+  <strong><%= rating %> Star:</strong> <%= @post.ratings.where(stars: rating).count %><br>
+<% end %>
+
+<!-- Add this for the rating form -->
+<h3>Rate this Post:</h3>
+<%= form_for([@post, Rating.new], url: topic_post_ratings_path(@post.topic, @post)) do |f| %>
+  <% (1..5).each do |rating| %>
+    <%= f.label "rating_#{rating}", "#{rating} Star" %>
+    <%= f.radio_button :stars, rating, id: "rating_#{rating}" %>
+  <% end %>
+  <%= f.submit "Submit Rating" %>
+<% end %>
+
 
