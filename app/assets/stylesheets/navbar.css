@@ -162,6 +162,7 @@ input[type=button], input[type=submit], input[type=reset] {
 .pagination a:hover {
     text-decoration: underline;
 }
+
  .star-rating {
      display: inline-block;
      font-size: 0; /* Remove space between inline-block elements */
@@ -172,16 +173,37 @@ input[type=button], input[type=submit], input[type=reset] {
     width: 30px; /* Adjust as needed for the size of the stars */
     text-align: center;
     font-size: 24px; /* Adjust as needed for the size of the stars */
-    color: gray;
+    color: gold;
     cursor: pointer;
 }
 
 .star-rating label:hover,
-.star-rating label:hover ~ label,
 .star-rating input:checked ~ label {
-    color: gold;
+    color: gray;
 }
 
 .star-rating input {
     display: none;
 }
+
+/* Adjust the order of the stars to fill from left to right */
+.star-rating label:nth-last-child(-n+5) { order: 1; }
+.star-rating label:nth-last-child(-n+4) { order: 2; }
+.star-rating label:nth-last-child(-n+3) { order: 3; }
+.star-rating label:nth-last-child(-n+2) { order: 4; }
+.star-rating label:nth-last-child(-n+1) { order: 5; }
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Adjust the height as needed */
+}
+
+.centered-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+

@@ -13,8 +13,6 @@ class PostsController < ApplicationController
     @posts = Post.page(params[:page]).per(10)
   end
 
-
-
   def new
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build
@@ -23,6 +21,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @topic.posts.build(post_params)
+    @post.image.attach(params[:post][:image]) if params[:post][:image]
     if @post.save
       redirect_to topic_posts_path(@topic), notice: 'Post was successfully created.'
     else
@@ -44,6 +43,7 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:id])
     if @post.update(post_params)
+      @post.image.attach(params[:post][:image]) if params[:post][:image]
       redirect_to topic_post_path(@topic, @post), notice: 'Post was successfully updated.'
     else
       render :edit

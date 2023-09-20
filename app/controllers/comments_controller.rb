@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   def new
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
-    @comment = @post.comments.build
+    @comment = @post.comments.new
   end
 
   def create

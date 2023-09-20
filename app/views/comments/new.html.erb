@@ -16,6 +16,7 @@
 </nav>
 <section class="home"></section>
 <div class="text">
+
 <%= form_for [@topic,@post,@comment] do |f| %>
 
   <div class="field">
@@ -25,5 +26,7 @@
   <div class="actions">
     <%= f.submit "Create comment" %>
   </div>
+
 <% end %>
+
 </div></body>

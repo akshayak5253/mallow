@@ -7,7 +7,6 @@ class TagsController < ApplicationController
       @tags = Tag.where("name LIKE ?", "%#{params[:search]}%")
     else
       @tags = Tag.all.order(name: :asc)
-
     end
   end
 

@@ -23,6 +23,14 @@
     <% posts = @posts %>
     <h1 style="text-align: center;color: #340fff"><%= posts.title %></h1>
     <p style="font-size: large"><%= posts.content %></p>
+    <div class="image-container">
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image, class: 'centered-image' %>
+      <% else %>
+        <p>No image attached.</p>
+      <% end %>
+    </div>
+
     <div>
       <%= link_to 'Edit this post', edit_topic_post_path(@topic, @post) %>
     </div>
@@ -51,12 +59,31 @@
 
 <!-- Add this for the rating form -->
 <h3>Rate this Post:</h3>
-<%= form_for([@post, Rating.new], url: topic_post_ratings_path(@post.topic, @post)) do |f| %>
-  <% (1..5).each do |rating| %>
-    <%= f.label "rating_#{rating}", "#{rating} Star" %>
-    <%= f.radio_button :stars, rating, id: "rating_#{rating}" %>
-  <% end %>
-  <%= f.submit "Submit Rating" %>
+<%= form_for([@post, Rating.new], url: topic_post_ratings_path(@post.topic, @post), html: { id: 'rating-form' }) do |f| %>
+  <div class="star-rating">
+    <% (1..5).each do |rating| %>
+      <%= f.radio_button :stars, rating, id: "rating_#{rating}" %>
+      <%= f.label "rating_#{rating}", '★', onclick: "submitRating(#{rating})" %>
+    <% end %>
+  </div>
+  <%= f.submit "Submit Rating", style: 'display: none;', id: 'rating-submit-button' %>
 <% end %>
+
+<script>
+    function submitRating(rating) {
+        var form = document.getElementById('rating-form');
+        if (form) {
+            // Set the selected rating before submitting the form
+            var ratingInput = form.querySelector('input[id="rating_' + rating + '"]');
+            if (ratingInput) {
+                ratingInput.checked = true;
+            }
+            // Submit the form
+            form.submit();
+        }
+    }
+</script>
+
+
 
 
