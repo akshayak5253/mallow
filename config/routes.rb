@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :topics do
     resources :posts do
       resources :ratings, only: [:create]
@@ -13,6 +14,8 @@ Rails.application.routes.draw do
   get 'all_posts',to: 'posts#all_posts'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
+
+
   # Defines the root path route ("/")
   # root "articles#index"
 end

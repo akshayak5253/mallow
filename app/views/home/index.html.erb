@@ -13,7 +13,17 @@
       <li><li><%= link_to 'Topics', topics_path %></li></li>
       <li><%= link_to 'Tags', tags_path %></li>
       <li><a href="#">About us</a></li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+        </li>
+      <% end %>
+
     </ul>
+
   </div>
 </nav>
 
