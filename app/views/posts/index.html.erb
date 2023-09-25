@@ -43,10 +43,11 @@
       <% @posts.each_with_index do |post,i| %>
         <tr><th scope="col"><%=i+1 %></th>
           <td><%=post.title %></td>
-          <td><%=post.writer%></td>
+          <td> <%= post.user.email %></td>
           <td><%=post.created_at.strftime('%d/%m/%y')%></td>
           <td><%time_difference = (Time.now - post.updated_at)/3600 %><%if time_difference <24%><%=time_difference.round(0)%>hour(s)ago<%else%><%=(time_difference/24).round(0)%>day(s)ago<%end %><td>
           <td><a href="posts/<%= post.id %>">See</a></td></tr>
+          <td></td>
       <% end %>
       </tbody>
     </table>

@@ -17,29 +17,37 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build
     @post.tag_ids = []
+    authorize! :update, @post
   end
 
   def create
+    @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
+    @post.user = current_user
     @post.image.attach(params[:post][:image]) if params[:post][:image]
+    authorize! :update, @post
     if @post.save
       redirect_to topic_posts_path(@topic), notice: 'Post was successfully created.'
+
     else
       render :new
     end
   end
 
   def show
+    @ability = Ability.new(current_user)
     @topic = Topic.find(params[:topic_id])
     @posts = @topic.posts.find(params[:id])
   end
 
   def edit
+    authorize! :update, @post
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:id])
   end
 
   def update
+    authorize! :update, @post
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:id])
     if @post.update(post_params)

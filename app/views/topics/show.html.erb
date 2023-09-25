@@ -24,7 +24,11 @@
   <h5 style="text-align: center">Created by - <%= topics.author %></h5>
   <p style="text-align: center;font-size: large">Topic : Followers : Post</p>
 <div class="button-container">
-  <%= link_to "Edit this topic  ", edit_topic_path(@topic), class: "btn btn-primary" %>
+  <% if can? :update, topics %>
+    <%= button_to 'Edit Topic', edit_topic_path(topics), class: "btn btn-primary" %>
+  <%else%>
+  <h6>You cannot edit this topic</h6>
+  <% end %>
 
   <%= button_to "  Destroy this topic", @topic, method: :delete, class: "btn btn-danger" %>
 

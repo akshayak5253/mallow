@@ -42,7 +42,7 @@
     <% @topics.each_with_index do |topic,i| %>
       <tr><th scope="col"><%=i+1 %></th>
     <td><%=topic.title %></td>
-    <td><%=topic.author %></td>
+    <td><%=topic.user.email %></td>
         <td><a href="topics/<%= topic.id %>">See</a></td></tr>
   <% end %>
     </tbody>

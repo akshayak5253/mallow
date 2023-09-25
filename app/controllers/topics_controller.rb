@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /topics or /topics.json
   def index
@@ -27,7 +28,7 @@ class TopicsController < ApplicationController
 
   # POST /topics or /topics.json
   def create
-    @topic = Topic.new(topic_params)
+    @topic = current_user.topics.build(topic_params)
 
     respond_to do |format|
       if @topic.save

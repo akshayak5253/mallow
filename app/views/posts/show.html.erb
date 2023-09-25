@@ -31,8 +31,12 @@
       <% end %>
     </div>
 
-    <div>
-      <%= link_to 'Edit this post', edit_topic_post_path(@topic, @post) %>
+    <div><% if @ability.can? :update, @post %>
+        <%= link_to 'Edit Post', edit_topic_post_path(@topic, @post) %>
+        <%else%>
+          <h3>You cannot edit this post</h3>
+        Logged in as: <%= current_user.email %>
+      <% end %>
     </div>
   <% else %>
     <p>No posts available.</p>

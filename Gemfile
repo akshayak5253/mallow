@@ -51,6 +51,8 @@ gem "bootsnap", require: false
 gem 'devise'
 gem 'rubocop', require: false
 gem 'kaminari'
+gem 'cancancan'
+
 
 
 

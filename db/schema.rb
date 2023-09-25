@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_191153) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_25_072855) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,7 +44,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191153) do
     t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -62,7 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191153) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "writer"
+    t.integer "user_id", null: false
     t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "posts_tags", force: :cascade do |t|
@@ -94,6 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191153) do
     t.string "author"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,7 +117,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_191153) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "images", "posts"
   add_foreign_key "posts", "topics"
+  add_foreign_key "posts", "users"
   add_foreign_key "ratings", "posts"
+  add_foreign_key "topics", "users"
 end
