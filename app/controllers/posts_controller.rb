@@ -38,6 +38,7 @@ class PostsController < ApplicationController
     @ability = Ability.new(current_user)
     @topic = Topic.find(params[:topic_id])
     @posts = @topic.posts.find(params[:id])
+    @count = @posts.comments.count
   end
 
   def edit
@@ -45,6 +46,7 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:id])
   end
+
 
   def update
     authorize! :update, @post

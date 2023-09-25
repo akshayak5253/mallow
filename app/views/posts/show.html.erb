@@ -30,7 +30,6 @@
         <p>No image attached.</p>
       <% end %>
     </div>
-
     <div><% if @ability.can? :update, @post %>
         <%= link_to 'Edit Post', edit_topic_post_path(@topic, @post) %>
         <%else%>
