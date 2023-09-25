@@ -20,6 +20,7 @@ class TopicsController < ApplicationController
   # GET /topics/new
   def new
     @topic = Topic.new
+    authorize! :create, @topic
   end
 
   # GET /topics/1/edit

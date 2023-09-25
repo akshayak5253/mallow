@@ -48,7 +48,9 @@
   </p>
 
   <div class="button-container">
+    <% if can? :destroy, posts %>
     <%= button_to "Destroy this post", topic_post_path(@topic, @post), method: :delete, class: "btn btn-danger"%>
+      <%end %>
     <%= link_to "View Comments", topic_post_comments_path(@topic, @post), class: "btn btn-primary" %>
     <%= link_to "Go back", topic_posts_path, class: "btn btn-success" %>
   </div>
