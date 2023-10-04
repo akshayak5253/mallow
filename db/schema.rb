@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_25_072855) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_04_045505) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -79,6 +79,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_072855) do
     t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
   end
 
+  create_table "posts_users_read_statuses", force: :cascade do |t|
+    t.boolean "read"
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_posts_users_read_statuses_on_post_id"
+    t.index ["user_id"], name: "index_posts_users_read_statuses_on_user_id"
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.integer "stars"
     t.integer "post_id", null: false
@@ -121,6 +131,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_072855) do
   add_foreign_key "images", "posts"
   add_foreign_key "posts", "topics"
   add_foreign_key "posts", "users"
+  add_foreign_key "posts_users_read_statuses", "posts"
+  add_foreign_key "posts_users_read_statuses", "users"
   add_foreign_key "ratings", "posts"
   add_foreign_key "topics", "users"
 end

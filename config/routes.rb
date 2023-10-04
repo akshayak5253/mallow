@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :topics do
     resources :posts do
+      patch 'mark_as_read', on: :member
       resources :ratings, only: [:create]
       resources :comments
     end
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   get 'all_posts',to: 'posts#all_posts'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
+  resources :posts
 
 
   # Defines the root path route ("/")

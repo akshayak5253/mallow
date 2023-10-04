@@ -14,9 +14,8 @@
     </ul>
   </div>
 </nav>
+<section class="home"></section>
 <div class="text">
-  <a href="posts/new"><button class="btn btn-success">Create new post</button></a>
-
   <div class="search">
     <%= form_tag topic_posts_path(@topic), method: :get do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search by posts" %>
@@ -25,7 +24,7 @@
   </div>
 
   <p style="color: green"><%= notice %></p>
-
+  <a href="posts/new"><button class="btn btn-success">Create new post</button></a>
   <h1 style="text-align: center">Posts</h1>
 
   <div id="topics" class="mt-4">
@@ -40,7 +39,7 @@
         <th scope="col">View</th>
         <th scope="col">Avg Rating</th>
         <th scope="col">No.of Comments</th>
-
+        <th scope="col">Read</th>
       </tr>
       </thead>
       <tbody>
@@ -63,11 +62,13 @@
           <td><a href="posts/<%= post.id %>">See</a></td>
           <td><%=post.average_rating%></td>
           <td><%=@count %></td>
+          <td><%= post.marked_as_read?(current_user) ? 'Readed' : 'Unreaded' %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
 </div>
+
 
 

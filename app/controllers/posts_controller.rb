@@ -2,6 +2,7 @@
 class PostsController < ApplicationController
   before_action :set_topic, except: [:all_posts]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -12,12 +13,16 @@ class PostsController < ApplicationController
   def all_posts
     @posts = Post.page(params[:page]).per(10)
   end
+  def mark_as_read
+    @post = Post.find(params[:id])
+    current_user.read_posts << @post
+    head :ok
+  end
 
   def new
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build
     @post.tag_ids = []
-    authorize! :update, @post
   end
 
   def create
@@ -25,7 +30,7 @@ class PostsController < ApplicationController
     @post = @topic.posts.build(post_params)
     @post.user = current_user
     @post.image.attach(params[:post][:image]) if params[:post][:image]
-    authorize! :update, @post
+
     if @post.save
       redirect_to topic_posts_path(@topic), notice: 'Post was successfully created.'
 
@@ -39,6 +44,10 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @posts = @topic.posts.find(params[:id])
     @count = @posts.comments.count
+    if user_signed_in? && !@post.marked_as_read?(current_user)
+      # Mark the post as read
+      @post.mark_as_read(current_user)
+    end
   end
 
   def edit
@@ -61,6 +70,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @post
     @post.destroy
     redirect_to topic_posts_path(@topic), notice: 'Post was successfully destroyed.'
   end

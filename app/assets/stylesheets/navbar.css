@@ -43,6 +43,13 @@ nav.sticky .logo a{
     list-style: none;
     margin: 0 8px;
 }
+.navbar {
+    transition: top 0.3s;
+}
+
+.navbar.hidden {
+    top: -80px; /* Adjust based on navbar height */
+}
 .nav-links li a{
     text-decoration: none;
     color: #0E2431;
@@ -203,6 +210,240 @@ input[type=button], input[type=submit], input[type=reset] {
     max-width: 100%;
     max-height: 100%;
 }
+.post-content {
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.post-title {
+    font-size: 24px;
+    color: #340fff;
+}
+
+.post-content-text {
+    font-size: 18px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.centered-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.no-image-text {
+    font-size: 16px;
+    color: red;
+}
+
+.no-posts-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+nav.sticky {
+    padding: 15px 20px;
+    background: #4070f4;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-content {
+    height: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .logo a {
+    font-weight: 500;
+    font-size: 35px;
+    color: #4070f4;
+}
+
+nav.sticky .logo a {
+    color: #fff;
+}
+
+.nav-content .nav-links {
+    display: flex;
+}
+
+.nav-content .nav-links li {
+    list-style: none;
+    margin: 0 8px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #0E2431;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #4070f4;
+}
+
+nav.sticky .nav-links li a {
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+nav.sticky .nav-links li a:hover {
+    color: #0E2431;
+}
+
+.home {
+    height: 10vh;
+    width: 100%;
+    background: url("background.jpeg") no-repeat;
+    background-attachment: fixed;
+}
+
+.text {
+    text-align: justify;
+    padding: 40px 80px;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+}
+
+.button-container button {
+    margin-right: 10px;
+}
+
+.star-rating {
+    display: inline-block;
+    font-size: 0;
+}
+
+.star-rating label {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    font-size: 24px;
+    color: gold;
+    cursor: pointer;
+}
+
+.star-rating label:hover,
+.star-rating input:checked ~ label {
+    color: gray;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label:nth-last-child(-n+5) { order: 1; }
+.star-rating label:nth-last-child(-n+4) { order: 2; }
+.star-rating label:nth-last-child(-n+3) { order: 3; }
+.star-rating label:nth-last-child(-n+2) { order: 4; }
+.star-rating label:nth-last-child(-n+1) { order: 5; }
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.centered-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Additional styles for post content */
+.post-content {
+    margin-bottom: 20px;
+}
+
+.post-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #340fff;
+}
+
+.post-content-text {
+    font-size: large;
+}
+
+.no-image-text {
+    font-size: 16px;
+    color: #ff0000;
+}
+
+/* Additional styles for ratings */
+.ratings-container {
+    margin-top: 20px;
+}
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 100px;
+    height: 100px;
+    border: 10px solid transparent;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.content {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Add a delay to simulate content loading */
+.loading-spinner::after {
+    content: "";
+    display: block;
+    animation: showContent 1s forwards;
+}
+
+@keyframes showContent {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
 
 
 
