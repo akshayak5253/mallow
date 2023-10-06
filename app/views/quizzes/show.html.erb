@@ -14,7 +14,29 @@
   <strong>Organization:</strong>
   <%= @quiz.organization.name %>
 </p>
+<% @quiz.ratings.group(:score).count.each do |score, count| %>
+  <div>
+    Rating: <%= score %> - Count: <%= count %>
+  </div>
+<% end %>
 
+<% if user_signed_in? %>
+  <%= form_with(model: [@quiz.organization, @quiz, Rating.new], url: organization_quiz_ratings_path(@quiz.organization, @quiz), method: 'post') do |form| %>
+
+    <div class="form-group">
+      <label for="rating">Rate the quiz (1-5):</label>
+      <br>
+      <% (1..5).each do |score| %>
+        <%= radio_button_tag "rating[score]", score %>
+        <%= label_tag "rating_#{score}", score %>
+
+      <% end %>
+    </div>
+    <%= form.submit 'Rate', class: 'btn btn-primary' %>
+  <% end %>
+<% else %>
+  <%= link_to 'Sign in to rate this quiz', new_user_session_path %>
+<% end %>
 <%= link_to 'Edit', edit_organization_quiz_path(@organization, @quiz) %> |
 <%= link_to 'Back', organization_quizzes_path(@organization) %> |
 <%= link_to 'Questions', organization_quiz_questions_path(@organization, @quiz) %> |

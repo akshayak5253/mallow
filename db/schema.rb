@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_30_115652) do
+ActiveRecord::Schema.define(version: 2023_10_06_080835) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,7 +61,18 @@ ActiveRecord::Schema.define(version: 2023_03_30_115652) do
     t.integer "quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
+  end
+
+  create_table "questions_users_read_statuses", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "read"
+    t.index ["question_id"], name: "index_questions_users_read_statuses_on_question_id"
+    t.index ["user_id"], name: "index_questions_users_read_statuses_on_user_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -78,6 +89,16 @@ ActiveRecord::Schema.define(version: 2023_03_30_115652) do
     t.bigint "tag_id"
     t.index ["quiz_id"], name: "index_quizzes_tags_on_quiz_id"
     t.index ["tag_id"], name: "index_quizzes_tags_on_tag_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "score"
+    t.integer "quiz_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quiz_id"], name: "index_ratings_on_quiz_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -101,5 +122,9 @@ ActiveRecord::Schema.define(version: 2023_03_30_115652) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "questions_users_read_statuses", "questions"
+  add_foreign_key "questions_users_read_statuses", "users"
   add_foreign_key "quizzes", "organizations"
+  add_foreign_key "ratings", "quizzes"
+  add_foreign_key "ratings", "users"
 end

@@ -1,3 +1,6 @@
+<head>
+  <meta name="csrf-token" content="<%= form_authenticity_token %>">
+</head>
 <p id="notice"><%= notice %></p>
 
 <h1>Questions</h1>
@@ -7,6 +10,7 @@
   <tr>
     <th>Brief</th>
     <th>Quiz</th>
+    <th>Created_by</th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -16,17 +20,56 @@
     <tr>
       <td><%= question.brief %></td>
       <td><%= question.quiz.topic %></td>
+      <td><%= question.user.email %></td>
       <td><%= link_to 'Show', organization_quiz_question_path(@organization, @quiz, question) %></td>
-      <td><%= link_to 'Edit', edit_organization_quiz_question_path(@organization, @quiz, question) %></td>
+      <% if can? :update, question %> <td><%= link_to 'Edit', edit_organization_quiz_question_path(@organization, @quiz, question) %></td><%end%>
+      <% if can? :destroy, question %>
       <td><%= link_to 'Destroy', organization_quiz_question_path(@organization, @quiz, question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+    </tr><%else %><%end %>
+  <td><p><strong>Status:</strong> <%= question.marked_as_read?(current_user) ? 'Read' : 'Unread' %></p></td>
   <% end %>
   </tbody>
 </table>
 <%== pagy_nav(@pagy) %>
-
 <br>
 
 <%= link_to 'New Question', new_organization_quiz_question_path(@organization, @quiz) %> |
 <%= link_to 'Back', organization_quizzes_path(@organization) %>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loggedIn = <%= user_signed_in? %>;
+
+        if (loggedIn) {
+            const questionId = <%= @question&.id || 'null' %>;
+            const quizId = <%= @question&.quiz&.id || 'null' %>;
+
+            if (quizId && questionId) {
+                const url = `/categories/${quizId}/categories/${questionId}/mark_as_read`;
+
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                fetch(url, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': csrfToken
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        console.log('Question marked as read');
+                    })
+                    .catch(error => {
+                        console.error('Error marking question as read:', error.message);
+                    });
+            } else {
+                console.error('Invalid question or quiz ID');
+            }
+        }
+    });
+</script>
+
+
+
 

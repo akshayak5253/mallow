@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :organizations do
     resources :quizzes do
+      resources :ratings, only: [:create]
       resources :questions do
         resources :choices
       end
