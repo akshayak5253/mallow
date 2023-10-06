@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Brief:</strong>
+  <%= @question.brief %>
+</p>
+
+<p>
+  <strong>Quiz:</strong>
+  <%= @question.quiz.topic %>
+</p>
+
+<%= render 'choices/form', choice: @question.choices.new %>
+<br>
+
+<%= link_to 'Edit', edit_organization_quiz_question_path(@organization, @quiz, @question) %> |
+<%= link_to 'Back', organization_quiz_questions_path(@organization, @quiz) %> |
+<%= link_to 'Choices', organization_quiz_question_choices_path(@organization, @quiz, @question) %>

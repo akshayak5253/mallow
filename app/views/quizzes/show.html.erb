@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @quiz.topic %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @quiz.description %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @quiz.organization.name %>
+</p>
+
+<%= link_to 'Edit', edit_organization_quiz_path(@organization, @quiz) %> |
+<%= link_to 'Back', organization_quizzes_path(@organization) %> |
+<%= link_to 'Questions', organization_quiz_questions_path(@organization, @quiz) %> |
+<%= link_to 'Add Question', new_organization_quiz_question_path(@organization, @quiz) %>

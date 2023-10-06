@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Brief</th>
+    <th>Quiz</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @questions.each do |question| %>
+    <tr>
+      <td><%= question.brief %></td>
+      <td><%= question.quiz.topic %></td>
+      <td><%= link_to 'Show', organization_quiz_question_path(@organization, @quiz, question) %></td>
+      <td><%= link_to 'Edit', edit_organization_quiz_question_path(@organization, @quiz, question) %></td>
+      <td><%= link_to 'Destroy', organization_quiz_question_path(@organization, @quiz, question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%== pagy_nav(@pagy) %>
+
+<br>
+
+<%= link_to 'New Question', new_organization_quiz_question_path(@organization, @quiz) %> |
+<%= link_to 'Back', organization_quizzes_path(@organization) %>
+

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<div><% if @organization.icon.attached? %>
+    <%= image_tag @organization.icon, class: 'image-w' %>
+  <% end %>
+</div>
+<p>
+  <strong>Name:</strong>
+  <%= @organization.name %>
+</p>
+<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<%= link_to 'Back', organizations_path %> |
+<%= link_to 'Quizzes', organization_quizzes_path(@organization) %> |
+<%= link_to 'Add Quiz', new_organization_quiz_path(@organization) %>

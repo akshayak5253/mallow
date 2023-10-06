@@ -1,0 +1,41 @@
+<%= form_with(model: [@organization, @quiz]) do |form| %>
+  <% if quiz.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+
+      <ul>
+        <% quiz.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :topic %>
+    <%= form.text_field :topic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <% if (@tags.collect { |u| [u.level, u.id] }).present? %>
+    <div class="field">
+      <%= form.label :tags, class: "form-label" %>
+      <%= form.select :tag_ids, @tags.collect { |u| [u.level, u.id] }, {}, { multiple: true } %>
+    </div>
+  <% end %>
+
+  <% if @tag.present? %>
+    <%= form.fields_for :tags do |f| %>
+      <%= f.label :new_tag, class: "form-label" %>
+      <%= f.text_field :level %>
+    <% end %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

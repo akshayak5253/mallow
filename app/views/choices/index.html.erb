@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Choices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Choice</td>
+      <th colspan="3">
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @choices.each do |choice| %>
+      <tr>
+        <td><%= choice.name %></td>
+        <td><%= link_to 'Edit', edit_organization_quiz_question_choice_path(@organization, @quiz, @question, choice) %></td>
+        <td><%= link_to 'Show', organization_quiz_question_choice_path(@organization, @quiz, @question, choice) %></td>
+        <td><%= link_to 'Destroy', organization_quiz_question_choice_path(@organization, @quiz, @question, choice), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
