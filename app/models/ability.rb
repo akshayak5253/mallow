@@ -18,13 +18,13 @@ class Ability
     can :destroy, Post do |post|
       post.user == user
     end
-    can :create, Comment
-
-    can :update, Comment do |comment|
-      comment.user == user
-    end
-    can :destroy, Comment do |comment|
-      comment.user == user
-    end
+    # can :create, Comment
+    #
+    # can :update, Comment do |comment|
+    #   comment.user == user
+    # end
+    # can :destroy, Comment do |comment|
+    #   comment.user == user
+    # end
   end
 end

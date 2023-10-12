@@ -1,0 +1,15 @@
+<!-- app/views/user_comment_ratings/new.html.erb -->
+
+<h1>Rate this comment</h1>
+
+<%= form_for([@topic, @post, @comment, @user_comment_rating], url: topic_post_comment_user_comment_ratings_path(@comment.post.topic, @comment.post, @comment), remote: true )do |f| %>
+  <%= f.hidden_field :comment_id, value: @comment.id %>
+  <div class="form-group">
+    <%= f.label :rating %>
+    <%= f.select :rating, (1..5).to_a, prompt: 'Select a rating' %>
+  </div>
+
+  <%= f.submit 'Rate Comment', class: 'btn btn-primary' %>
+<% end %>
+
+<%#= link_to 'Back', topic_post_comment_path(@topic, @post, @comment) %>

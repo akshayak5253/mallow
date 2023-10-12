@@ -14,10 +14,13 @@
     </ul>
   </div>
 </nav>
-<h1>Welcome to comments section</h1>
-<% if @comments.present?%>
-  <% comments = @comments %>
-  <h1>comments.content</h1>
-<% else %>
-  <p>No comments available.</p>
-<%end %>
+<h1>Ratings for Comment</h1>
+
+<%= @comment.content %>
+
+<h2>Ratings:</h2>
+<ul>
+  <% @comment.user_comment_ratings.each do |rating| %>
+    <li><strong>User:</strong> <%= rating.user.email %> | <strong>Rating:</strong> <%= rating.rating %></li>
+  <% end %>
+</ul>

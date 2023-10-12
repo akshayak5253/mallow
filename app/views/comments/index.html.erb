@@ -22,19 +22,14 @@
   <h1>Comments</h1>
 
   <ul class="comment-list">
-    <% @comments.each_with_index do |comment,i| %>
-      <li class="comment">
-        <div class="comment-header">
-          <strong><%= i+1 %>.<%= comment.user.email%></strong>
-        </div>
-        <% if can? :edit, comment %>
-          <%= link_to 'Edit Comment', edit_topic_post_comment_path(@topic, @post, comment) %>
-        <% end %>
-        <div class="comment-content">
-          <%= comment.content %>
-        </div>
-      </li>
+    <% @comments.each do |comment| %>
+      <div class="comment">
+        <p><strong><%= comment.user.email %>:</strong> <%= comment.content %></p>
+
+        <%= link_to 'View Ratings', new_topic_post_comment_user_comment_rating_path(@topic, @post, comment) %>
+      </div>
     <% end %>
+
   </ul>
 </div>
 
