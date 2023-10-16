@@ -1,0 +1,17 @@
+<% if @post.errors.any? %>
+// Handle errors
+// Display error messages using alerts
+<% @post.errors.full_messages.each do |message| %>
+alert("Error: <%= message %>");
+// You can display each error message using alerts
+<% end %>
+<% else %>
+// Handle successful post creation
+// Display a success message using an alert
+alert("Post created successfully!");
+// You can also redirect or update the UI here if needed
+<% end %>
+
+// Additional JavaScript code based on the response
+// This can include further UI updates or actions based on the response
+// Add any additional JavaScript actions you need after handling errors or successful creation

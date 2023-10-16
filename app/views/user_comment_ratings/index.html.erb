@@ -1,11 +1,16 @@
-<h1>All Ratings</h1>
 
-<ul>
+  <h1>All Ratings</h1>
+
+  <ul>
     <% @ratings.each do |rating| %>
-    <li>
+      <li>
         <strong>User:</strong> <%= rating.user.email %>,
         <strong>Comment:</strong> <%= rating.comment.content %>,
         <strong>Rating:</strong> <%= rating.rating %>
-    </li>
+      </li>
     <% end %>
-</ul>
+  </ul>
+
+  <%= link_to "Back to Comments", topic_post_comments_path(@topic, @post, @comment), class: "btn btn-secondary" %>
+
+</div>

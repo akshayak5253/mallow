@@ -25,8 +25,19 @@
     <% @comments.each do |comment| %>
       <div class="comment">
         <p><strong><%= comment.user.email %>:</strong> <%= comment.content %></p>
+        <h1>Rate this comment</h1>
 
-        <%= link_to 'View Ratings', new_topic_post_comment_user_comment_rating_path(@topic, @post, comment) %>
+        <%= form_for([@topic, @post, comment, UserCommentRating.new], url: topic_post_comment_user_comment_ratings_path(@topic, @post, comment), remote: true )do |f| %>
+          <%= f.hidden_field :comment_id, value: comment.id %>
+          <div class="form-group">
+            <%= f.label :rating %>
+            <%= f.select :rating, (1..5).to_a, prompt: 'Select a rating' %>
+          </div>
+
+          <%= f.submit 'Rate Comment', class: 'btn btn-primary' %>
+        <% end %>
+
+        <%= link_to 'View Ratings', topic_post_comment_user_comment_ratings_path(@topic, @post, comment) %>
       </div>
     <% end %>
 

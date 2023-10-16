@@ -1,13 +1,13 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: %i[ show edit update destroy ]
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   # GET /topics or /topics.json
   def index
     if params[:search]
       @topics = Topic.where("title LIKE ?", "%#{params[:search]}%")
     else
-      @topics = Topic.all.order(title: :asc)
+      @topics = Topic.includes(:user).all
 
     end
   end
@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
   # GET /topics/new
   def new
     @topic = Topic.new
-    authorize! :create, @topic
+    # authorize! :create, @topic
   end
 
   # GET /topics/1/edit
@@ -29,15 +29,13 @@ class TopicsController < ApplicationController
 
   # POST /topics or /topics.json
   def create
-    @topic = current_user.topics.build(topic_params)
+    @topic = Topic.new(topic_params)
+    @topic.user_id = 1  # Set the user_id to 1
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to topic_url(@topic), notice: "Topic was successfully created." }
         format.json { render :show, status: :created, location: @topic }
-
       else
-        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
@@ -76,6 +74,6 @@ class TopicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def topic_params
-      params.require(:topic).permit(:title, :author)
+      params.require(:topic).permit(:title, :author, :user_id)
     end
 end

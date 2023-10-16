@@ -30,12 +30,14 @@ class PostsController < ApplicationController
     @post = @topic.posts.build(post_params)
     @post.user = current_user
     @post.image.attach(params[:post][:image]) if params[:post][:image]
-
     if @post.save
-      redirect_to topic_posts_path(@topic), notice: 'Post was successfully created.'
-
+      respond_to do |format|
+      format.js
+      end
     else
-      render :new
+      respond_to do |format|
+      format.js
+      end
     end
   end
 

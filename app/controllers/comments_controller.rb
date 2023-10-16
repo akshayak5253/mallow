@@ -1,10 +1,11 @@
 # Comments Controller
 class CommentsController < ApplicationController
+  before_action :set_post
   # load_and_authorize_resource
   def index
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
-    @comments = @post.comments
+    @comments = Comment.includes(:user).where(post_id: params[:post_id])
   end
 
   def new
@@ -57,6 +58,9 @@ class CommentsController < ApplicationController
     else
       render :edit
     end
+  end
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 
   def comment_params
