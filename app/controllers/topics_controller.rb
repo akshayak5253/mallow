@@ -8,7 +8,6 @@ class TopicsController < ApplicationController
       @topics = Topic.where("title LIKE ?", "%#{params[:search]}%")
     else
       @topics = Topic.includes(:user).all
-
     end
   end
 
@@ -31,13 +30,14 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     @topic.user_id = 1  # Set the user_id to 1
-    respond_to do |format|
+
       if @topic.save
-        format.json { render :show, status: :created, location: @topic }
+        flash[:success] = 'Topic was successfully created.'
+        redirect_to topics_path
       else
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
+        render 'new'
       end
-    end
+
   end
 
   # PATCH/PUT /topics/1 or /topics/1.json

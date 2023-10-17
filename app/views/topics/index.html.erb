@@ -10,7 +10,11 @@
     <button value="Submit"><i class="fa fa-search"></i></button>
   <% end %>
   </div>
-<p style="color: green"><%= notice %></p>
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
 
 <h1 style="text-align: center">Topics</h1>
 
@@ -35,4 +39,3 @@
       </table>
 </div>
 </div>
-
