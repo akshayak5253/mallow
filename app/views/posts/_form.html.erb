@@ -1,5 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<%= form_for([@topic, Post.new], url: topic_posts_path(@topic), method: :post, remote: true) do |form| %>
+<%= form_for([@topic, Post.new], url: topic_posts_path(@topic), method: :post) do |form| %>
   <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control', placeholder: "Enter the title name" %>
@@ -33,7 +33,7 @@
 
   <div class="form-group">
     <%= form.submit "Create", class: 'btn btn-primary' %>
-    <%= link_to "Cancel", topic_posts_path, class: 'btn btn-danger' %> <!-- Replace some_path with your cancel action's path -->
+    <%= link_to "Cancel", topic_posts_path(@topic), class: 'btn btn-danger' %> <!-- Replace some_path with your cancel action's path -->
 
   </div>
 <% end %>

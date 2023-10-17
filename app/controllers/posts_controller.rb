@@ -7,8 +7,9 @@ class PostsController < ApplicationController
   def index
     @topic = Topic.find(params[:topic_id])
     @posts = @topic.posts
-    return unless params[:search]
-    @posts = Post.where("title LIKE ?", "%#{params[:search]}%")
+    from_date = params[:from_date].present? ? Date.parse(params[:from_date]) : 1.day.ago.to_date
+    to_date = params[:to_date].present? ? Date.parse(params[:to_date]) : Date.today
+    @posts = @posts.filtered_by_date(from_date, to_date)
   end
   def all_posts
     @posts = Post.page(params[:page]).per(10)
@@ -32,11 +33,11 @@ class PostsController < ApplicationController
     @post.image.attach(params[:post][:image]) if params[:post][:image]
     if @post.save
       respond_to do |format|
-      format.js
+        format.html { redirect_to topic_posts_path(@topic) }
       end
     else
       respond_to do |format|
-      format.js
+        format.html { redirect_to topic_posts_path(@topic) }
       end
     end
   end

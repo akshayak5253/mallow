@@ -60,15 +60,13 @@ Rails.application.configure do
   config.assets.quiet = true
   config.active_storage.service = :local
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.after_initialize do
-
-    Bullet.raise = true
-    Bullet.enable = true
-    Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-   # Raise an error if N+1 query is detected
-  end
+  # config.after_initialize do
+  #   Bullet.raise = true
+  #   Bullet.enable = true
+  #   Bullet.alert = true
+  #   Bullet.bullet_logger = true
+  #   Bullet.console = true
+  # end
 
 
   # Raises error for missing translations.

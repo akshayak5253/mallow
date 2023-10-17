@@ -2,19 +2,7 @@
 <%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag 'comments' %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-<nav>
-  <div class="nav-content">
-    <div class="logo">
-      <a><%= link_to 'JustWrite', root_path %></a>
-    </div>
-    <ul class="nav-links">
-      <li><%= link_to 'Home', root_path %></li>
-      <li><%= link_to 'Topics', topics_path %></li>
-      <li><%= link_to 'Tags', tags_path %></li>
-      <li><a href="#">About us</a></li>
-    </ul>
-  </div>
-</nav>
+
 <section class="home"></section>
 <div class="text">
   <a href="comments/new" ><button class="btn btn-success" style="float: right;">Create new comments</button></a>
