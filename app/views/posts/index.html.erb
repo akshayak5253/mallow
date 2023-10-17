@@ -19,7 +19,7 @@
     <%= label_tag "To Date:" %>
     <%= date_field_tag :to_date, params[:to_date] %>
 
-    <%= submit_tag "Show Details", class: "btn btn-primary" %>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
   <% end %>
 
   <div id="topics" class="mt-4">
@@ -40,7 +40,7 @@
       <tbody>
       <% @posts.each_with_index do |post, i| %>
         <tr>
-          <%@count = post.comments.count %>
+
 
           <td><%= i + 1 %></td>
           <td><%= post.title %></td>
@@ -55,15 +55,24 @@
             <% end %>
           </td>
           <td><a href="posts/<%= post.id %>">See</a></td>
-          <td><%=post.average_rating%></td>
-          <td><%=@count %></td>
-          <td><%= post.marked_as_read?(current_user) ? 'Readed' : 'Unreaded' %></td>
+          <td>
+            <% if post.ratings_count.present? && post.ratings_count > 0 %>
+              <%= post.ratings.sum(:stars) / post.ratings_count %>
+            <% else %>
+              No ratings yet
+            <% end %>
+          </td>
+          <td><%=post.comments.size %></td>
+          <td>
+            <% if post.marked_as_read?(current_user) %>
+              <i class="fas fa-check-circle" style="color: green;"></i> Read
+            <% else %>
+              <i class="far fa-circle" style="color: red;"></i> Unread
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
 </div>
-
-
-

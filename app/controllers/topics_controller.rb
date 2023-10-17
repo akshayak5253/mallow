@@ -31,7 +31,6 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     @topic.user_id = 1  # Set the user_id to 1
-
     respond_to do |format|
       if @topic.save
         format.json { render :show, status: :created, location: @topic }

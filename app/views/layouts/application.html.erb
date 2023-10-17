@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>JustWrite</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+<head>
+  <title>JustWrite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body><head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
-  <nav>
-    <div class="nav-content">
-      <div class="logo">
-        <a href="#">JustWrite</a>
-      </div>
-      <ul class="nav-links">
-        <li><%= link_to 'Home', root_path %></li>
-        <li><li><%= link_to 'Topics', topics_path %></li></li>
-        <li><%= link_to 'Tags', tags_path %></li>
-        <li><a href="#">About us</a></li>
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-          </li>
-        <% else%>
-          <li class="nav-item">
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+<body>
+<nav>
+  <div class="nav-content">
+    <div class="logo">
+      <a href="#">JustWrite</a>
     </div>
-  </nav>
-
-  <section class="home">
-  </section>
-
-  <script>
-      let nav = document.querySelector("nav");
-      window.onscroll = function() {
-          if(document.documentElement.scrollTop > 20){
-              nav.classList.add("sticky");
-          }else {
-              nav.classList.remove("sticky");
-          }
-      }
-  </script>
-  <div class="text">
-  </body>
-  <%= yield %>
+    <ul class="nav-links">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Topics', topics_path %></li>
+      <li><%= link_to 'Tags', tags_path %></li>
+      <li><a href="#">About us</a></li>
+      <%# if user_signed_in? %>
+          <%#= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-links" %>
+<!--        </li>-->
+      <%# else %>
+<!--        <li>-->
+          <%#= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+<!--        </li>-->
+      <%# end %>
+    </ul>
   </div>
-  </body>
+</nav>
+
+<section class="home">
+</section>
+
+<script>
+    let nav = document.querySelector("nav");
+    window.onscroll = function() {
+        if (document.documentElement.scrollTop > 20) {
+            nav.classList.add("sticky");
+        } else {
+            nav.classList.remove("sticky");
+        }
+    }
+</script>
+
+<div class="text">
+  <%= yield %>
+</div>
+</body>
 </html>
