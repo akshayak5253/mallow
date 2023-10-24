@@ -55,7 +55,7 @@ gem 'kaminari'
 gem 'cancancan'
 
 
-
+gem "letter_opener", group: :development
 
 # Use Sass to process CSS
 # gem "sassc-rails"
