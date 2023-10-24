@@ -442,6 +442,11 @@ nav.sticky .nav-links li a:hover {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+.custom-avatar {
+    width: 10px; /* Set your preferred width */
+    height: 10px; /* Set your preferred height */
+    /*object-fit: cover; !* Ensures the image maintains its aspect ratio and fits within the specified dimensions *!*/
+}
 
 
 
